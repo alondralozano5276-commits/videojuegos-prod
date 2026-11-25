@@ -1,0 +1,30 @@
+import unittest
+from app import create_app
+from models import db
+
+class RoutesTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app('testing')
+        self.client = self.app.test_client()
+        self.ctx = self.app.app_context()
+        self.ctx.push()
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.ctx.pop()
+
+    def test_videogame_access(self):
+        resp = self.client.get('/videogame/2?ref=123')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_juegos_requires_login(self):
+        resp = self.client.get('/juegos')
+        self.assertEqual(resp.status_code, 302)
+        self.assertIn('/auth/login', resp.headers['Location'])
+
+if __name__ == '__main__':
+    unittest.main()
+
+# Prueba de integración continua con GitHub Actions 

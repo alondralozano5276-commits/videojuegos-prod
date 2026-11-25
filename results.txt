@@ -1,0 +1,9 @@
+test_get_juegos_api (test_api.APITestCase.test_get_juegos_api) ... ok
+test_juego_creation (test_models.ModelTestCase.test_juego_creation) ... ok
+test_juegos_requires_login (test_routes.RoutesTestCase.test_juegos_requires_login) ... ok
+test_videogame_access (test_routes.RoutesTestCase.test_videogame_access) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.789s
+
+OK
